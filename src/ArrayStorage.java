@@ -10,13 +10,11 @@ public class ArrayStorage {
 
     void clear() {
         Arrays.fill(storage, 0, size, null);
-        for (int i = 0; i < size; i++) {
-            storage[i] = null;
-        }
+        size = 0;
     }
 
     void save(Resume r) {
-        if (size <= MAX_SIZE) {
+        if (size < MAX_SIZE) {
             storage[size++] = r;
         }
     }
@@ -28,7 +26,7 @@ public class ArrayStorage {
             }
         }
 
-        return new Resume("No resume with uuid " + uuid + " found!");
+        return null;
     }
 
     void delete(String uuid) {
@@ -36,6 +34,7 @@ public class ArrayStorage {
             if (storage[i].toString().equals(uuid)) {
                 storage[i] = storage[size - 1];
                 storage[--size] = null;
+                break;
             }
         }
     }
@@ -44,9 +43,9 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        Resume[] temp = new Resume[size];
-        System.arraycopy(storage, 0, temp, 0, size);
-        return temp;
+        Resume[] resumes = new Resume[size];
+        System.arraycopy(storage, 0, resumes, 0, size);
+        return resumes;
     }
 
     int size() {
