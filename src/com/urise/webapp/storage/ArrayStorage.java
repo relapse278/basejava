@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     private final static int MAX_SIZE = 10000;
-    private Resume[] storage = new Resume[MAX_SIZE];
+    private final Resume[] storage = new Resume[MAX_SIZE];
     private int size;
 
     public void clear() {
