@@ -55,4 +55,12 @@ public class ArrayStorage {
     public int size() {
         return size;
     }
+
+    public void update(Resume resume) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].toString().equals(resume.getUuid())) {
+                storage[i] = resume;
+            }
+        }
+    }
 }
