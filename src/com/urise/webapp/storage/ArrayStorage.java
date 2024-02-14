@@ -1,25 +1,29 @@
+package com.urise.webapp.storage;
+
+import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    final static int MAX_SIZE = 10000;
-    Resume[] storage = new Resume[MAX_SIZE];
-    int size;
+    private final static int MAX_SIZE = 10000;
+    private Resume[] storage = new Resume[MAX_SIZE];
+    private int size;
 
-    void clear() {
+    public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    void save(Resume r) {
+    public void save(Resume r) {
         if (size < MAX_SIZE) {
             storage[size++] = r;
         }
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].toString().equals(uuid)) {
                 return storage[i];
@@ -29,7 +33,7 @@ public class ArrayStorage {
         return null;
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].toString().equals(uuid)) {
                 storage[i] = storage[size - 1];
@@ -42,13 +46,13 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         Resume[] resumes = new Resume[size];
         System.arraycopy(storage, 0, resumes, 0, size);
         return resumes;
     }
 
-    int size() {
+    public int size() {
         return size;
     }
 }
