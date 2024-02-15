@@ -12,10 +12,13 @@ public class MainTestArrayStorage {
     public static void main(String[] args) {
         Resume r1 = new Resume();
         r1.setUuid("uuid1");
+        r1.setName("John");
         Resume r2 = new Resume();
         r2.setUuid("uuid2");
+        r2.setName("Patrick");
         Resume r3 = new Resume();
         r3.setUuid("uuid3");
+        r3.setName("Sarah");
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);
@@ -30,7 +33,8 @@ public class MainTestArrayStorage {
         ARRAY_STORAGE.delete(r1.getUuid());
         printAll();
         Resume rUpdate = new Resume();
-        rUpdate.setUuid("uuid222");
+        rUpdate.setUuid("uuid2");
+        rUpdate.setName("Ruslan");
         ARRAY_STORAGE.update(rUpdate);
         printAll();
         ARRAY_STORAGE.clear();

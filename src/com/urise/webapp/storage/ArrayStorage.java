@@ -1,7 +1,6 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
-
 import java.util.Arrays;
 
 /**
@@ -21,47 +20,44 @@ public class ArrayStorage {
         if (size < MAX_SIZE) {
             for (int i = 0; i < size; i++) {
                 if (storage[i].toString().equals(r.getUuid())) {
-                    System.out.println("Resume with the uuid " + r.getUuid() +
-                            " already exists!");
+                    System.out.println("Resume with the uuid '" + r.getUuid() +
+                            "' already exists!");
                     return;
                 }
             }
             storage[size++] = r;
         } else {
-            System.out.println("Resume with the uuid " + r.getUuid() +
-                    " can't be saved, the storage is full!");
+            System.out.println("Resume with the uuid '" + r.getUuid() +
+                    "' can't be saved, the storage is full!");
         }
     }
 
     public Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].toString().equals(uuid)) {
-                return storage[i];
-            }
+        int i = indexOfResume(uuid);
+        if (i >= 0) {
+            return storage[i];
         }
 
-        System.out.println("Resume with the uuid " + uuid+ " not found!");
+        resumeNotFoundMessage(uuid);
         return null;
     }
 
     public void delete(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].toString().equals(uuid)) {
-                storage[i] = storage[size - 1];
-                storage[--size] = null;
-                break;
-            }
+        int i = indexOfResume(uuid);
+        if (i >= 0) {
+            storage[i] = storage[size - 1];
+            storage[--size] = null;
+            return;
         }
 
-        System.out.println("Resume with the uuid " + uuid + " not found!");
+        resumeNotFoundMessage(uuid);
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        Resume[] resumes = new Resume[size];
-//        System.arraycopy(storage, 0, resumes, 0, size);
+        Resume[] resumes;
         resumes = Arrays.copyOfRange(storage, 0, size);
         return resumes;
     }
@@ -71,13 +67,25 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].toString().equals(resume.getUuid())) {
-                storage[i] = resume;
-                break;
-            }
+        int i = indexOfResume(resume.getUuid());
+        if (i >= 0) {
+            storage[i] = resume;
+            return;
         }
 
-        System.out.println("Resume with the uuid " + resume.getUuid() + " not found!");
+        resumeNotFoundMessage(resume.getUuid());
+    }
+
+    private int indexOfResume (String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].toString().equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    void resumeNotFoundMessage(String uuid) {
+        System.out.println("Resume with the uuid '" + uuid + "' not found!");
     }
 }
