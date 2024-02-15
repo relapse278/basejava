@@ -19,7 +19,17 @@ public class ArrayStorage {
 
     public void save(Resume r) {
         if (size < MAX_SIZE) {
+            for (int i = 0; i < size; i++) {
+                if (storage[i].toString().equals(r.getUuid())) {
+                    System.out.println("Resume with the uuid " + r.getUuid() +
+                            " already exists!");
+                    return;
+                }
+            }
             storage[size++] = r;
+        } else {
+            System.out.println("Resume with the uuid " + r.getUuid() +
+                    " can't be saved, the storage is full!");
         }
     }
 
@@ -30,6 +40,7 @@ public class ArrayStorage {
             }
         }
 
+        System.out.println("Resume with the uuid " + uuid+ " not found!");
         return null;
     }
 
@@ -41,6 +52,8 @@ public class ArrayStorage {
                 break;
             }
         }
+
+        System.out.println("Resume with the uuid " + uuid + " not found!");
     }
 
     /**
@@ -48,7 +61,8 @@ public class ArrayStorage {
      */
     public Resume[] getAll() {
         Resume[] resumes = new Resume[size];
-        System.arraycopy(storage, 0, resumes, 0, size);
+//        System.arraycopy(storage, 0, resumes, 0, size);
+        resumes = Arrays.copyOfRange(storage, 0, size);
         return resumes;
     }
 
@@ -60,7 +74,10 @@ public class ArrayStorage {
         for (int i = 0; i < size; i++) {
             if (storage[i].toString().equals(resume.getUuid())) {
                 storage[i] = resume;
+                break;
             }
         }
+
+        System.out.println("Resume with the uuid " + resume.getUuid() + " not found!");
     }
 }
