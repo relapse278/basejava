@@ -18,18 +18,16 @@ public class ArrayStorage {
 
     public void save(Resume r) {
         if (size < MAX_SIZE) {
-            for (int i = 0; i < size; i++) {
-                if (storage[i].toString().equals(r.getUuid())) {
-                    System.out.println("Resume with the uuid '" + r.getUuid() +
-                            "' already exists!");
-                    return;
-                }
+            if (indexOfResume(r.getUuid()) != -1) {
+                System.out.println("Resume with the uuid '" + r.getUuid() +
+                        "' already exists!");
+                return;
             }
-            storage[size++] = r;
         } else {
             System.out.println("Resume with the uuid '" + r.getUuid() +
                     "' can't be saved, the storage is full!");
         }
+        storage[size++] = r;
     }
 
     public Resume get(String uuid) {
@@ -78,7 +76,7 @@ public class ArrayStorage {
 
     private int indexOfResume (String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].toString().equals(uuid)) {
+            if (storage[i].getUuid().equals(uuid)) {
                 return i;
             }
         }
