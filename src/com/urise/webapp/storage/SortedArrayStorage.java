@@ -54,12 +54,11 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void delete(String uuid) {
-        int index = getIndex(uuid);
+        int position = getIndex(uuid);
 
-        if (index >= 0) {
-            storage[index] = storage[size - 1];
+        if (position >= 0) {
+            System.arraycopy(storage, position + 1, storage, position, size - position - 1);
             storage[--size] = null;
-            Arrays.sort(storage, 0, size);
             return;
         }
 
