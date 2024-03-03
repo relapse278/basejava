@@ -1,7 +1,6 @@
 package com.urise.webapp;
 
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.storage.ArrayStorage;
 import com.urise.webapp.storage.SortedArrayStorage;
 import com.urise.webapp.storage.Storage;
 
@@ -41,6 +40,12 @@ public class MainArray {
                     r = new Resume();
                     r.setUuid(uuid);
                     ARRAY_STORAGE.save(r);
+                    printAll();
+                    break;
+                case "update":
+                    r = new Resume();
+                    r.setUuid(uuid);
+                    ARRAY_STORAGE.update(r);
                     printAll();
                     break;
                 case "delete":

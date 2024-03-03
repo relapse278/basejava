@@ -23,7 +23,8 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         int index = getIndex(resume.getUuid());
 
         if (index >= 0) {
-            storage[index] = resume;
+            delete(resume.getUuid());
+            save(resume);
             return;
         }
 
@@ -35,11 +36,9 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         int position = getIndex(resume.getUuid());
 
         if (size >= STORAGE_LIMIT) {
-            System.out.println("Resume with the uuid '" + resume.getUuid() +
-                    "' can't be saved, the storage is full!");
+            System.out.println("Resume with the uuid '" + resume.getUuid() + "' can't be saved, the storage is full!");
         } else if (position >= 0) {
-            System.out.println("Resume with the uuid '" + resume.getUuid() +
-                    "' already exists!");
+            System.out.println("Resume with the uuid '" + resume.getUuid() + "' already exists!");
         } else {
             if (size > 0) {
                 position = - position - 1;
