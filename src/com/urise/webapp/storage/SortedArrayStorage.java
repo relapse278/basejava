@@ -23,7 +23,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         int index = getIndex(resume.getUuid());
 
         if (index >= 0) {
-            delete(resume.getUuid());
+            //delete(resume.getUuid());
             save(resume);
             return;
         }
