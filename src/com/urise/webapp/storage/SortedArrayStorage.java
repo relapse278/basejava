@@ -6,16 +6,10 @@ import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
-    protected int getIndex(String uuid) {
+    public int getIndex(String uuid) {
         Resume resume = new Resume();
         resume.setUuid(uuid);
         return Arrays.binarySearch(storage, 0, size, resume);
-    }
-
-    @Override
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
     }
 
     @Override
@@ -62,10 +56,5 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         }
 
         System.out.println("Resume with the uuid '" + uuid + "' not found!");
-    }
-
-    @Override
-    public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
     }
 }
