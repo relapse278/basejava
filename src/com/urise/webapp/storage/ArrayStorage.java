@@ -7,17 +7,6 @@ import com.urise.webapp.model.Resume;
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
-    public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-
-        if (index >= 0) {
-            storage[index] = resume;
-            return;
-        }
-
-        System.out.println("Resume with the uuid '" + resume.getUuid() + "' not found!");
-    }
-
     @Override
     void saveAuxiliary(Resume resume) {
         storage[size] = resume;
