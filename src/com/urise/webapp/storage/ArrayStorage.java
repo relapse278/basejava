@@ -18,18 +18,10 @@ public class ArrayStorage extends AbstractArrayStorage {
         System.out.println("Resume with the uuid '" + resume.getUuid() + "' not found!");
     }
 
-    public void save(Resume r) {
-        if (size >= STORAGE_LIMIT) {
-            System.out.println("Resume with the uuid '" + r.getUuid() +
-                    "' can't be saved, the storage is full!");
-        } else if (getIndex(r.getUuid()) != -1) {
-            System.out.println("Resume with the uuid '" + r.getUuid() +
-                    "' already exists!");
-        } else {
-            storage[size++] = r;
-        }
+    @Override
+    void saveAuxiliary(Resume resume) {
+        storage[size] = resume;
     }
-
 
     public void delete(String uuid) {
         int index = getIndex(uuid);

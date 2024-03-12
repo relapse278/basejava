@@ -26,22 +26,14 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
-
-        if (size >= STORAGE_LIMIT) {
-            System.out.println("Resume with the uuid '" + resume.getUuid() + "' can't be saved, the storage is full!");
-        } else if (index >= 0) {
-            System.out.println("Resume with the uuid '" + resume.getUuid() + "' already exists!");
+     void saveAuxiliary(Resume resume) {
+        if (size > 0) {
+            int index = getIndex(resume.getUuid());
+            index = - index - 1;
+            System.arraycopy(storage, index, storage, index + 1, size - index);
+            storage[index] = resume;
         } else {
-            if (size > 0) {
-                index = - index - 1;
-                System.arraycopy(storage, index, storage, index + 1, size - index);
-                storage[index] = resume;
-            } else {
-                storage[0] = resume;
-            }
-            size++;
+            storage[0] = resume;
         }
     }
 
