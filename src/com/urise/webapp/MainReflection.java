@@ -15,10 +15,11 @@ public class MainReflection {
         System.out.println(field.get(r));
         field.set(r, "new_uuid");
         System.out.println(r);
-        // TODO : invoke r.toString via reflection
+
+        // DONE: invoke r.toString via reflection
         try {
             System.out.println(r.getClass().getMethods()[5].invoke(r));
-            System.out.println(r.toString());
+            System.out.println(r);
         } catch (InvocationTargetException e) {
             throw new RuntimeException(e);
         }
