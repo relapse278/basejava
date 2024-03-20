@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public abstract class AbstractArrayStorageTest {
-    private Storage storage;
+    private final Storage storage;
     protected static final int STORAGE_LIMIT = 3;
 
     protected AbstractArrayStorageTest(Storage storage) {
