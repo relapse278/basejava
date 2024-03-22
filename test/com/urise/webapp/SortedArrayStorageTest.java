@@ -1,4 +1,4 @@
-package com.urise.webapp.test;
+package com.urise.webapp;
 
 import com.urise.webapp.storage.SortedArrayStorage;
 

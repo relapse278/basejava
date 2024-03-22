@@ -1,18 +1,17 @@
-package com.urise.webapp.test;
+package com.urise.webapp;
 
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.storage.Storage;
 import com.urise.webapp.storage.AbstractArrayStorage;
+import com.urise.webapp.storage.Storage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public abstract class AbstractArrayStorageTest {
     private final Storage storage;
-//    protected static final int STORAGE_LIMIT = 3;
 
     protected AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
