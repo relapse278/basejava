@@ -1,8 +1,8 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exception.StorageException;
-import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.exception.ExistStorageException;
+import com.urise.webapp.exception.NotExistStorageException;
+import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -12,6 +12,10 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
 
+    abstract void removeResume(int index);
+    abstract void insertResume(Resume resume);
+    protected abstract Integer getKey(String uuid);
+
     @Override
     public void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -19,8 +23,28 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
+    protected boolean exists(Object index) {
+        if (index instanceof Integer) {
+            return (Integer) index >= 0;
+        } else {
+            throw new ExistStorageException("An argument with a type different from Integer has been passed " +
+                                            "to the exists() method during the runtime!");
+        }
+    }
+
+    @Override
+    protected Resume getImpl(Object index) {
+        if (index instanceof Integer) {
+            return storage[(Integer) index];
+        } else {
+            throw new IllegalArgumentException("An argument with a type different from Integer has been passed " +
+                                               "to the getImpl() method during the runtime!");
+        }
+    }
+
+    @Override
     public Resume get(String uuid) {
-        int index = getIndex(uuid);
+        int index = getKey(uuid);
 
         if (index >= 0) {
             return storage[index];
@@ -42,43 +66,41 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return size;
     }
 
-    public void save(Resume resume) {
-        if (size >= STORAGE_LIMIT) {
-            throw new StorageException("Resume with the uuid '" + resume.getUuid() +
-                    "' can't be saved, the storage is full!", resume.getUuid());
-        } else if (getIndex(resume.getUuid()) >= 0) {
-            throw new ExistStorageException(resume.getUuid());
+    @Override
+    protected void saveImpl(Resume resume, Object index) {
+        if (index instanceof Integer) {
+            if (size >= STORAGE_LIMIT) {
+                throw new StorageException("Resume with the uuid '" + resume.getUuid() +
+                        "' can't be saved, the storage is full!", resume.getUuid());
+            } else {
+                insertResume(resume);
+            }
+
+            size++;
         } else {
-            insertResume(resume);
+            throw new IllegalArgumentException("An argument with a type different from Integer has been passed " +
+                    "to the saveImpl() method during the runtime!");
         }
-        size++;
     }
 
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-
-        if (index >= 0) {
-            removeResume(index);
+    @Override
+    protected void deleteImpl(Object index) {
+        if (index instanceof Integer) {
+            removeResume((Integer) index);
             storage[--size] = null;
-            return;
-        }
-
-        throw new NotExistStorageException(uuid);
-    }
-
-    public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-
-        if (index >= 0) {
-            storage[index] = resume;
         } else {
-            throw new NotExistStorageException(resume.getUuid());
+            throw new IllegalArgumentException("The argument index with a type different from Integer " +
+                    "has been passed to the deleteImpl() method during the runtime!");
         }
     }
 
-    abstract void removeResume(int index);
-
-    abstract void insertResume(Resume resume);
-
-    abstract int getIndex(String uuid);
+    @Override
+    protected void updateImpl(Resume resume, Object index) {
+        if (index instanceof Integer) {
+            storage[(Integer) index] = resume;
+        } else {
+            throw new IllegalArgumentException("The argument index with a type different from Integer " +
+                                               "has been passed to the updateImpl() method during the runtime!");
+        }
+    }
 }
