@@ -9,13 +9,8 @@ public class ListStorage extends AbstractStorage {
     private List<Resume> list = new ArrayList<>();
 
     @Override
-    protected boolean exists(Object key) {
-//        if (key instanceof Integer) {
-            return key != null;
-//        } else {
-//            throw new ExistStorageException("An argument with a type different from Integer has been passed " +
-//                    "to the exists() method of the ListStorage class during the runtime!");
-//        }
+    protected boolean isExisting(Object key) {
+        return key != null;
     }
 
     @Override
@@ -29,43 +24,23 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume getImpl(Object key) {
-//        if (key instanceof Integer) {
-            return list.get((Integer) key);
-//        } else {
-//            throw new ExistStorageException("An argument with a type different from Integer has been passed " +
-//                    "to the getImpl() method of the ListStorage class during the runtime!");
-//        }
+    protected Resume doGet(Object key) {
+        return list.get((Integer) key);
     }
 
     @Override
-    protected void saveImpl(Resume resume, Object key) {
-//        if (key instanceof Integer) {
-            list.add(resume);
-//        } else {
-//            throw new ExistStorageException("An argument with a type different from Integer has been passed " +
-//                    "to the saveImpl() method of the ListStorage class during the runtime!");
-//        }
+    protected void doSave(Resume resume, Object key) {
+        list.add(resume);
     }
 
     @Override
-    protected void updateImpl(Resume resume, Object key) {
-//        if (key instanceof Integer) {
-            list.set((Integer) key, resume);
-//        } else {
-//            throw new ExistStorageException("An argument with a type different from Integer has been passed " +
-//                    "to the updateImpl() method of the ListStorage class during the runtime!");
-//        }
+    protected void doUpdate(Resume resume, Object key) {
+        list.set((Integer) key, resume);
     }
 
     @Override
-    protected void deleteImpl(Object key) {
-//        if (key instanceof Integer) {
-            list.remove((Integer) key);
-//        } else {
-//            throw new ExistStorageException("An argument with a type different from Integer has been passed " +
-//                    "to the deleteImpl() method of the ListStorage class during the runtime!");
-//        }
+    protected void doDelete(Object key) {
+        list.remove((int) key);
     }
 
     @Override
@@ -75,7 +50,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public Resume[] getAll() {
-        return list.toArray(new Resume[list.size()]);
+        return list.toArray(new Resume[0]);
     }
 
     @Override

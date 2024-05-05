@@ -5,34 +5,34 @@ import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
-    protected abstract boolean exists(Object key);
+    protected abstract boolean isExisting(Object key);
     protected abstract Object getKey(String uuid);
-    protected abstract Resume getImpl(Object key);
-    protected abstract void saveImpl(Resume resume, Object key);
-    protected abstract void updateImpl(Resume resume, Object key);
-    protected abstract void deleteImpl(Object key);
+    protected abstract Resume doGet(Object key);
+    protected abstract void doSave(Resume resume, Object key);
+    protected abstract void doUpdate(Resume resume, Object key);
+    protected abstract void doDelete(Object key);
 
     @Override
     public Resume get(String uuid) {
-        return getImpl(getExistingKey(uuid));
+        return doGet(getExistingKey(uuid));
     }
 
     public void save(Resume resume) {
-        saveImpl(resume, getNotExistingKey(resume.getUuid()));
+        doSave(resume, getNotExistingKey(resume.getUuid()));
     }
 
     public void delete(String uuid) {
-        deleteImpl(getExistingKey(uuid));
+        doDelete(getExistingKey(uuid));
     }
 
     public void update(Resume resume) {
-        updateImpl(resume, getExistingKey(resume.getUuid()));
+        doUpdate(resume, getExistingKey(resume.getUuid()));
     }
 
     private Object getExistingKey(String uuid) {
         Object key = getKey(uuid);
 
-        if (!exists(key)) {
+        if (!isExisting(key)) {
             throw new NotExistStorageException(uuid);
         }
 
@@ -42,7 +42,7 @@ public abstract class AbstractStorage implements Storage {
     private Object getNotExistingKey(String uuid) {
         Object key = getKey(uuid);
 
-        if (exists(key)) {
+        if (isExisting(key)) {
             throw new ExistStorageException(uuid);
         }
 

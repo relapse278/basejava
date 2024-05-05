@@ -25,10 +25,6 @@ public abstract class AbstractStorageTest {
     private static final Resume resume3 = new Resume(UUID_3);
     private static final Resume resume4 = new Resume(UUID_4);
 
-//    protected AbstractStorageTest() {
-//
-//    }
-
     @Before
     public void setUp() throws Exception {
         storage.clear();

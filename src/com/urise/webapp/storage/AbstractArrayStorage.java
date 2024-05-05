@@ -23,7 +23,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean exists(Object index) {
+    protected boolean isExisting(Object index) {
         if (index instanceof Integer) {
             return (Integer) index >= 0;
         } else {
@@ -33,7 +33,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume getImpl(Object index) {
+    protected Resume doGet(Object index) {
         if (index instanceof Integer) {
             return storage[(Integer) index];
         } else {
@@ -67,7 +67,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void saveImpl(Resume resume, Object index) {
+    protected void doSave(Resume resume, Object index) {
         if (index instanceof Integer) {
             if (size >= STORAGE_LIMIT) {
                 throw new StorageException("Resume with the uuid '" + resume.getUuid() +
@@ -84,7 +84,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void deleteImpl(Object index) {
+    protected void doDelete(Object index) {
         if (index instanceof Integer) {
             removeResume((Integer) index);
             storage[--size] = null;
@@ -95,7 +95,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateImpl(Resume resume, Object index) {
+    protected void doUpdate(Resume resume, Object index) {
         if (index instanceof Integer) {
             storage[(Integer) index] = resume;
         } else {
