@@ -1,0 +1,52 @@
+package com.urise.webapp;
+
+import com.urise.webapp.model.Resume;
+
+import java.util.*;
+
+public class MainCollections {
+    public static void main(String[] args) {
+        Collection<Resume> collection = new ArrayList<>();
+
+        final String UUID_1 = "uuid1";
+        final String UUID_2 = "uuid2";
+        final String UUID_3 = "uuid3";
+        final String UUID_4 = "uuid4";
+
+        final Resume resume1 = new Resume(UUID_1, fullName);
+        final Resume resume2 = new Resume(UUID_2, fullName);
+        final Resume resume3 = new Resume(UUID_3, fullName);
+        final Resume resume4 = new Resume(UUID_4, fullName);
+
+        collection.add(resume1);
+        collection.add(resume2);
+        collection.add(resume3);
+        collection.add(resume4);
+
+        System.out.println(collection.toString());
+
+        Iterator<Resume> iterator = collection.iterator();
+        while (iterator.hasNext()) {
+            if (Objects.equals(iterator.next().getUuid(), UUID_2)) {
+                iterator.remove();
+                System.out.println("A resume has been removed!");
+            }
+        }
+
+        System.out.println(collection.toString());
+
+        System.out.println("A new List with 3 identical resumes will be created!");
+        List<Resume> list = new ArrayList<>();
+        list.add(resume1);
+        list.add(resume1);
+        list.add(resume1);
+
+        System.out.println(list.toString());
+
+        System.out.println("A new Set with 3 identical resumes from the list will be created!");
+        Collection<Resume> set  = new HashSet<>();
+        set.addAll(list);
+
+        System.out.println(set.toString());
+    }
+}
