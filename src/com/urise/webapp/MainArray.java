@@ -22,7 +22,7 @@ public class MainArray {
         while (true) {
             System.out.print("Введите одну из команд - (list | size | save uuid | update uuid | delete uuid | get uuid | clear | exit): ");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
-            if (params.length < 1 || params.length > 2) {
+            if (params.length < 1 || params.length > 3) {
                 System.out.println("Неверная команда.");
                 continue;
             }
@@ -38,15 +38,11 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.size());
                     break;
                 case "save":
-                    r = new Resume(uuid, fullName);
-//                    r.setUuid(uuid);
-                    ARRAY_STORAGE.save(r);
+                    ARRAY_STORAGE.save(new Resume(uuid));
                     printAll();
                     break;
                 case "update":
-                    r = new Resume(uuid, fullName);
-//                    r.setUuid(uuid);
-                    ARRAY_STORAGE.update(r);
+                    ARRAY_STORAGE.update(new Resume(uuid, params[2]));
                     printAll();
                     break;
                 case "delete":

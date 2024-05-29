@@ -10,20 +10,20 @@ import org.junit.Test;
 public abstract class AbstractStorageTest {
     protected Storage storage;
 
-    protected AbstractStorageTest(Storage storage) {
-        this.storage = storage;
-    }
-
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
     private static final String UUID_NOT_EXIST = "dummy";
 
-    private static final Resume resume1 = new Resume(UUID_1, fullName);
-    private static final Resume resume2 = new Resume(UUID_2, fullName);
-    private static final Resume resume3 = new Resume(UUID_3, fullName);
-    private static final Resume resume4 = new Resume(UUID_4, fullName);
+    private static final Resume resume1 = new Resume(UUID_1, "dummy1");
+    private static final Resume resume2 = new Resume(UUID_2, "dummy2");
+    private static final Resume resume3 = new Resume(UUID_3, "dummy3");
+    private static final Resume resume4 = new Resume(UUID_4, "dummy4");
+
+    protected AbstractStorageTest(Storage storage) {
+        this.storage = storage;
+    }
 
     @Before
     public void setUp() throws Exception {

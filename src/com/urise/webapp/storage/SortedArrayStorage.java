@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
     @Override
     protected Integer getKey(String uuid) {
-        Resume resume = new Resume(uuid, fullName);
+        Resume resume = new Resume(uuid, "dummy");
         return Arrays.binarySearch(storage, 0, size, resume);
     }
 
