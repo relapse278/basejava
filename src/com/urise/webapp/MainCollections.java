@@ -23,7 +23,7 @@ public class MainCollections {
         collection.add(resume3);
         collection.add(resume4);
 
-        System.out.println(collection.toString());
+        System.out.println(collection);
 
         Iterator<Resume> iterator = collection.iterator();
         while (iterator.hasNext()) {
@@ -33,7 +33,7 @@ public class MainCollections {
             }
         }
 
-        System.out.println(collection.toString());
+        System.out.println(collection);
 
         System.out.println("A new List with 3 identical resumes will be created!");
         List<Resume> list = new ArrayList<>();
@@ -41,12 +41,12 @@ public class MainCollections {
         list.add(resume1);
         list.add(resume1);
 
-        System.out.println(list.toString());
+        System.out.println(list);
 
         System.out.println("A new Set with 3 identical resumes from the list will be created!");
         Collection<Resume> set  = new HashSet<>();
         set.addAll(list);
 
-        System.out.println(set.toString());
+        System.out.println(set);
     }
 }
