@@ -53,14 +53,6 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public List<Resume> getAllSorted() {
-        List<Resume> list = new ArrayList<>(this.list);
-        Collections.sort(list); // #1
-        Collections.sort(list, Comparator.comparing(resume -> (resume.getFullName() + resume.getUuid()))); // #2
-        return list;
-    }
-
-    @Override
     public int size() {
         return list.size();
     }
