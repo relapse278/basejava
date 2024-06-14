@@ -12,13 +12,16 @@ public class MainTestArrayStorage {
 //    static final Storage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
-        Resume r1 = new Resume("uuid1", "Mario");
+//        Resume r1 = new Resume("uuid1", "Mario");
+        Resume r1 = new Resume("uuid1");
 //        r1.setUuid("uuid1");
         r1.setFullName("John");
-        Resume r2 = new Resume("uuid2", "Marlon");
+//        Resume r2 = new Resume("uuid2", "Marlon");
+        Resume r2 = new Resume("uuid2");
 //        r2.setUuid("uuid2");
         r2.setFullName("Patrick");
-        Resume r3 = new Resume("uuid3", "Mary");
+//        Resume r3 = new Resume("uuid3", "Mary");
+        Resume r3 = new Resume("uuid3");
 //        r3.setUuid("uuid3");
         r3.setFullName("Sarah");
 
@@ -34,7 +37,8 @@ public class MainTestArrayStorage {
         printAll();
         ARRAY_STORAGE.delete(r1.getUuid());
         printAll();
-        Resume rUpdate = new Resume("uuid2", "Tom");
+//        Resume rUpdate = new Resume("uuid2", "Tom");
+        Resume rUpdate = new Resume("uuid2");
 //        rUpdate.setUuid("uuid2");
         rUpdate.setFullName("Tobias");
         ARRAY_STORAGE.update(rUpdate);

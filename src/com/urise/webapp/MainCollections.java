@@ -13,10 +13,15 @@ public class MainCollections {
         final String UUID_3 = "uuid3";
         final String UUID_4 = "uuid4";
 
-        final Resume resume1 = new Resume(UUID_1, "Tom");
-        final Resume resume2 = new Resume(UUID_2, "Kurt");
-        final Resume resume3 = new Resume(UUID_3, "Mario");
-        final Resume resume4 = new Resume(UUID_4, "Sarah");
+//        final Resume resume1 = new Resume(UUID_1, "Tom");
+//        final Resume resume2 = new Resume(UUID_2, "Kurt");
+//        final Resume resume3 = new Resume(UUID_3, "Mario");
+//        final Resume resume4 = new Resume(UUID_4, "Sarah");
+
+        final Resume resume1 = new Resume(UUID_1);
+        final Resume resume2 = new Resume(UUID_2);
+        final Resume resume3 = new Resume(UUID_3);
+        final Resume resume4 = new Resume(UUID_4);
 
         collection.add(resume1);
         collection.add(resume2);

@@ -42,7 +42,7 @@ public class MainArray {
                     printAll();
                     break;
                 case "update":
-                    ARRAY_STORAGE.update(new Resume(uuid, params[2]));
+                    ARRAY_STORAGE.update(new Resume(uuid));
                     printAll();
                     break;
                 case "delete":

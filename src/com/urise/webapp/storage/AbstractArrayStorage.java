@@ -15,6 +15,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     abstract void removeResume(int index);
     abstract void insertResume(Resume resume);
     protected abstract Integer getKey(String uuid);
+//    protected abstract Integer getKey(Resume resume);
 
     @Override
     public void clear() {
@@ -44,6 +45,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     public Resume get(String uuid) {
+//    public Resume get(Resume resume) {
+//        int index = getKey(resume.getUuid());
         int index = getKey(uuid);
 
         if (index >= 0) {
