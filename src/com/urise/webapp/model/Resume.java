@@ -10,22 +10,23 @@ public class Resume implements Comparable<Resume> {
     private String uuid;
     private String fullName;
 
-    public Resume() {
-        this(UUID.randomUUID().toString());
-    }
-
-    public Resume(String uuid) {
-        this.uuid = uuid;
-    }
-
-//    public Resume(String fullName) {
-//        this(UUID.randomUUID().toString(), fullName);
+//    public Resume() {
+//        this(UUID.randomUUID().toString());
+////        this.fullName = "dummy";
 //    }
 
-//    public Resume(String uuid, String fullName) {
+//    public Resume(String uuid) {
 //        this.uuid = uuid;
-//        this.fullName = fullName;
 //    }
+
+    public Resume(String fullName) {
+        this(UUID.randomUUID().toString(), fullName);
+    }
+
+    public Resume(String uuid, String fullName) {
+        this.uuid = uuid;
+        this.fullName = fullName;
+    }
 
     public String getUuid() {
         return this.uuid;
@@ -70,7 +71,10 @@ public class Resume implements Comparable<Resume> {
     }
 
     @Override
+//    public int compareTo(Resume o) {
+//        return (this.fullName + this.uuid).compareTo(o.fullName + o.uuid);
+//    }
     public int compareTo(Resume o) {
-        return (this.fullName + this.uuid).compareTo(o.fullName + o.uuid);
+        return this.uuid.compareTo(o.uuid);
     }
 }

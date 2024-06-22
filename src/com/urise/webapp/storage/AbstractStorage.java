@@ -55,8 +55,8 @@ public abstract class AbstractStorage implements Storage {
     @Override
     public List<Resume> getAllSorted() {
         List<Resume> list = new ArrayList<>(Arrays.asList(getAll()));
-//        list.sort(FULL_NAME_COMPARATOR.thenComparing(UUID_COMPARATOR)); // #1
-        list.sort(UUID_COMPARATOR); // #1
+        list.sort(FULL_NAME_COMPARATOR.thenComparing(UUID_COMPARATOR)); // #1
+//        list.sort(UUID_COMPARATOR); // #1
 //      list.sort(Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid)); // #2, here no need for the static field.
         return list;
     }
