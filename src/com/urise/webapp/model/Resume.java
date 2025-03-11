@@ -1,14 +1,17 @@
 package com.urise.webapp.model;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
  * Initial resume class
  */
 public class Resume implements Comparable<Resume> {
-    // Unique identifier
-    private String uuid;
+    private final String uuid;
     private String fullName;
+    private Map<ResumeItems, > info = new ;
 
 //    public Resume() {
 //        this(UUID.randomUUID().toString());
@@ -26,6 +29,12 @@ public class Resume implements Comparable<Resume> {
     public Resume(String uuid, String fullName) {
         this.uuid = uuid;
         this.fullName = fullName;
+    }
+
+    public Resume(String uuid, String fullName, Info info) {
+        this.uuid = uuid;
+        this.fullName = fullName;
+        this.info = info;
     }
 
     public String getUuid() {
@@ -76,5 +85,33 @@ public class Resume implements Comparable<Resume> {
 //    }
     public int compareTo(Resume o) {
         return this.uuid.compareTo(o.uuid);
+    }
+
+    class Info {
+        private Map<ResumeItems, Object> info = new HashMap<>();
+
+        public void addData(ResumeItems resumeItem, Object data) {
+            switch (resumeItem) {
+                case CONTACTS: {
+                    info.put(resumeItem, (Contact) data);
+                }
+
+                case ACHIEVEMENTS, QUALIFICATIONS, PERSONAL_QUALITIES: {
+                    info.put(resumeItem, (List<String>) data);
+                }
+
+                case POSITION: {
+                    info.put(resumeItem, (String) data);
+                }
+
+                case WORK: {
+                    info.put(resumeItem, (List<WorkItem>)data);
+                }
+
+                case EDUCATION: {
+                    info.put(resumeItem, (List<EducationItem>)data);
+                }
+            }
+        }
     }
 }
